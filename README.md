@@ -42,6 +42,14 @@ Create user with read/write access:
 
     git clone https://github.com/iquidus/explorer explorer
 
+### Ubuntu 16.04
+
+    sudo apt-get update
+    sudo wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+    source ~/.nvm/nvm.sh
+    nvm install 4.8
+    sudo apt-get install libkrb5-dev
+
 ### Install node modules
 
     cd explorer && npm install --production
