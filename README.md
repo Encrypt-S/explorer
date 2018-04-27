@@ -20,6 +20,17 @@ An open source block explorer written in node.js.
 *  mongodb 2.6.x
 *  *coind
 
+### Ubuntu 16.04
+
+    sudo apt-get update
+    sudo wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+    source ~/.nvm/nvm.sh
+    nvm install 4.8
+    sudo apt-get install libkrb5-dev
+    sudo mkdir /data /data/db
+    sudo chmod 777 /data/db
+    npm install -g forever
+
 ### Create database
 
 Enter MongoDB cli:
@@ -28,27 +39,26 @@ Enter MongoDB cli:
 
 Create databse:
 
-    > use explorerdb
+    > use your_db_name
 
 Create user with read/write access:
 
-    > db.createUser( { user: "iquidus", pwd: "3xp!0reR", roles: [ "readWrite" ] } )
+    > db.createUser( { user: "your_db_username", pwd: "your_db_password", roles: [ "readWrite" ] } )
+    > exit
 
 *note: If you're using mongo shell 2.4.x, use the following to create your user:
 
-    > db.addUser( { user: "username", pwd: "password", roles: [ "readWrite"] })
+    > db.addUser( { user: "your_db_username", pwd: "your_db_password", roles: [ "readWrite"] })
+    > exit
+
+### Ubuntu 16.04
+
+    mongod --shutdown
+    sudo mongod --fork --logpath /var/log/mongodb/mongodb.log --dbpath /data/db/
 
 ### Get the source
 
     git clone https://github.com/iquidus/explorer explorer
-
-### Ubuntu 16.04
-
-    sudo apt-get update
-    sudo wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-    source ~/.nvm/nvm.sh
-    nvm install 4.8
-    sudo apt-get install libkrb5-dev
 
 ### Install node modules
 
@@ -63,6 +73,10 @@ Create user with read/write access:
 ### Start Explorer
 
     npm start
+
+    or using forever:
+    
+    forever start -c "npm start" ./
 
 *note: mongod must be running to start the explorer*
 
